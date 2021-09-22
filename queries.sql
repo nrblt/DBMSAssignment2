@@ -71,3 +71,7 @@ create table Appointment (
 	disease_id int references Disease,
 	bill_id int references Bill
 );
+
+
+alter table Medical_treatments rename to Medicaments
+
