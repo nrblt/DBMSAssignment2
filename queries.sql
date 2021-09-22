@@ -3,15 +3,6 @@ create table Driver(
 	driver_fname varchar,
 	driver_lname varchar
 );
-
-create table Ambulance_service(
-	ambulance_id serial primary key,
-	ambulance_name varchar,
-	driver_id int references(Driver),
-	hospital_id int references(Hospitals)
-	
-);
-
 create table Hospitals(
 	hospital_id serial primary key,
 	hospital_name varchar,
@@ -20,20 +11,29 @@ create table Hospitals(
 	hospital_status varchar
 );
 
+create table Specialization(
+	spec_id serial primary key,
+	spec_name varchar
+);
+
+create table Ambulance_service(
+	ambulance_id serial primary key,
+	ambulance_name varchar,
+	driver_id int references Driver,
+	hospital_id int references Hospitals
+	
+);
+
 create table Medical_treatments(
 	medicament_id serial primary key,
 	medicament_name varchar
 );
 
 create table Hospital_medicaments(
-	hospital_id int references(Hospitals),
-	medicament_id int references(Medical_treatments)
+	hospital_id int references Hospitals,
+	medicament_id int references Medical_treatments
 ); 
 
-create table Specialization(
-	spec_id serial primary key,
-	spec_name varchar
-);
 
 create table Doctor(
 	dc_id serial primary key,
@@ -41,8 +41,8 @@ create table Doctor(
 	dc_lname varchar,
 	dc_gender varchar, 
 	dc_bday date,
-	spec_id int references(Specialization),
-	hospital_id int references(Hospitals)
+	spec_id int references Specialization,
+	hospital_id int references Hospitals
 );
 
 create table Patient(
@@ -66,8 +66,8 @@ create table Disease (
 create table Appointment (
 	appointment_id serial primary key,
 	appointment_date date,
-	doctor_id int references(Doctor),
-	patient_id int references(Patient),
-	disease_id int references(Disease),
-	bill_id int references(Bill)
+	doctor_id int references Doctor,
+	patient_id int references Patient,
+	disease_id int references Disease,
+	bill_id int references Bill
 );
