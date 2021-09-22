@@ -75,3 +75,5 @@ create table Appointment (
 
 alter table Medical_treatments rename to Medicaments
 
+alter table Ambulance_service drop column ambulance_name
+
